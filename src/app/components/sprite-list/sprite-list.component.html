@@ -21,8 +21,8 @@
     <div *ngIf="selectedGenId === 0 || selectedGenId === gen.id">
       <h2 class="gen-title">{{ gen.name }}</h2>
 
-      <mat-grid-list cols="9" rowHeight="160px" gutterSize="8px">
-        <mat-grid-tile *ngFor="let p of gen.pokemons">
+      <div class="pokemon-grid">
+        <div *ngFor="let p of gen.pokemons" class="pokemon-grid-item">
           <mat-card class="pokemon-card" [routerLink]="['/sprites', p.name]">
             <img
               mat-card-image
@@ -38,8 +38,8 @@
               <div class="mat-body-2">{{ p.name | titlecase }}</div>
             </mat-card-content>
           </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+        </div>
+      </div>
     </div>
   </div>
 </div>

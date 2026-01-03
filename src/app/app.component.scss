@@ -9,15 +9,14 @@
   color: white;
 
   .hero-title {
-    font-family: 'Pokemon Solid', sans-serif;
-    font-size: 4rem; 
-    color: #ffde00; 
-    -webkit-text-stroke: 8px #3b4cca; 
+    font-family: "Pokemon Solid", sans-serif;
+    font-size: 4rem;
+    color: #ffde00;
+    -webkit-text-stroke: 8px #3b4cca;
     paint-order: stroke fill;
     letter-spacing: 6px;
     z-index: 2;
-    text-shadow: 
-      6px 6px 0px #2a3990;
+    text-shadow: 6px 6px 0px #2a3990;
   }
 
   .hero-mons-container {
@@ -25,11 +24,11 @@
     align-items: flex-end;
     position: absolute;
     bottom: 5px;
-    
-    &.left { 
+
+    &.left {
       left: 10px;
     }
-    &.right { 
+    &.right {
       right: 10px;
       flex-direction: row-reverse;
     }
@@ -39,7 +38,7 @@
     height: 75px;
     width: auto;
     z-index: 3;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
     transition: transform 0.2s ease-out;
     margin: 0 -15px;
 
@@ -61,19 +60,68 @@
 
     &.flip-sprite {
       transform: scaleX(-1);
-      
+
       &:hover {
         transform: translateY(-10px) scale(-1.1, 1.1);
       }
     }
   }
+
+  @media (max-width: 1050px) {
+    .hero-title {
+      font-size: 2.8rem;
+      -webkit-text-stroke-width: 5px;
+    }
+    .hero-mon {
+      height: 50px;
+      margin: 0 -8px;
+      &:nth-child(2) {
+        height: 70px;
+      }
+      &:nth-child(3) {
+        height: 90px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    height: 90px;
+    .hero-title {
+      font-size: 2rem;
+      -webkit-text-stroke-width: 4px;
+      letter-spacing: 2px;
+    }
+    .hero-mon {
+      height: 35px;
+      margin: 0 -5px;
+      &:nth-child(2) {
+        height: 45px;
+      }
+      &:nth-child(3) {
+        height: 60px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    height: 70px;
+    .hero-title {
+      font-size: 1.4rem;
+      -webkit-text-stroke-width: 3px;
+      letter-spacing: 1px;
+    }
+    .hero-mon {
+      height: 25px;
+      margin: 0 -2px;
+      &:nth-child(2) {
+        height: 32px;
+      }
+      &:nth-child(3) {
+        height: 42px;
+      }
+    }
+  }
 }
-
-
-
-
-
-
 
 .nav-toolbar {
   position: sticky;
@@ -126,7 +174,40 @@
   }
 }
 
+@media (max-width: 768px) {
+  .hero-toolbar {
+    height: 100px;
+    .hero-title {
+      font-size: 2.2rem;
+      -webkit-text-stroke-width: 4px;
+      letter-spacing: 2px;
+    }
+  }
+
+  .nav-toolbar {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 8px 16px;
+
+    .nav-buttons {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .spacer {
+      display: none;
+    }
+
+    .search-box {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
 @media (max-width: 600px) {
-  .hero-mon { display: none; }
-  .search-box { width: 150px; }
+  .hero-toolbar {
+    height: 80px;
+  }
 }

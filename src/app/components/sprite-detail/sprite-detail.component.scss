@@ -109,16 +109,38 @@
   tbody th {
     text-align: left;
     font-weight: 500;
-    width: 180px;
+    width: 150px;
     background: #fafafa;
     color: #555;
-    padding-left: 16px;
+    padding-left: 12px;
     border-right: 1px solid #eee;
   }
 
   img {
-    max-width: 80px;
+    max-width: 60px;
     image-rendering: pixelated;
+  }
+}
+
+.generation-section {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 600px) {
+  .sprite-detail-page { padding: 16px; }
+  .page-title { font-size: 20px; }
+  
+  .generation-table {
+    font-size: 12px;
+    
+    th, td { padding: 8px 4px; }
+    tbody th { width: 100px; padding-left: 8px; }
+  }
+
+  .overview-table .overview-sprite {
+    width: 48px;
+    height: 48px;
   }
 }
 
