@@ -1,0 +1,132 @@
+.hero-toolbar {
+  height: 120px;
+  background: linear-gradient(180deg, #3b4cca 0%, #2a3990 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0 24px;
+  color: white;
+
+  .hero-title {
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: 4rem; 
+    color: #ffde00; 
+    -webkit-text-stroke: 8px #3b4cca; 
+    paint-order: stroke fill;
+    letter-spacing: 6px;
+    z-index: 2;
+    text-shadow: 
+      6px 6px 0px #2a3990;
+  }
+
+  .hero-mons-container {
+    display: flex;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 5px;
+    
+    &.left { 
+      left: 10px;
+    }
+    &.right { 
+      right: 10px;
+      flex-direction: row-reverse;
+    }
+  }
+
+  .hero-mon {
+    height: 75px;
+    width: auto;
+    z-index: 3;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
+    transition: transform 0.2s ease-out;
+    margin: 0 -15px;
+
+    &:nth-child(2) {
+      height: 95px;
+      z-index: 4;
+    }
+
+    &:nth-child(3) {
+      height: 120px;
+      z-index: 5;
+      margin-bottom: -5px;
+    }
+
+    &:hover {
+      transform: translateY(-10px) scale(1.1);
+      z-index: 10;
+    }
+
+    &.flip-sprite {
+      transform: scaleX(-1);
+      
+      &:hover {
+        transform: translateY(-10px) scale(-1.1, 1.1);
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+.nav-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--primary-color) !important;
+  color: white;
+  height: 64px;
+  display: flex;
+  align-items: center;
+
+  .nav-buttons {
+    display: flex;
+    gap: 8px;
+
+    button {
+      color: white;
+      font-weight: 400;
+    }
+  }
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 4px;
+  padding: 4px 12px;
+  width: 250px;
+  margin-left: 16px;
+
+  .search-icon {
+    color: #999;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #333;
+
+    &::placeholder {
+      color: #bbb;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-mon { display: none; }
+  .search-box { width: 150px; }
+}

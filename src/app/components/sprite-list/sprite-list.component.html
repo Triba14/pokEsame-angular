@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="filters-container">
+    <button
+      mat-raised-button
+      [color]="selectedGenId === 0 ? 'accent' : ''"
+      (click)="filterGen(0)"
+    >
+      All
+    </button>
+    <button
+      mat-button
+      *ngFor="let config of genConfig"
+      [color]="selectedGenId === config.id ? 'accent' : ''"
+      (click)="filterGen(config.id)"
+    >
+      {{ config.name }}
+    </button>
+  </div>
+
+  <div *ngFor="let gen of generations">
+    <div *ngIf="selectedGenId === 0 || selectedGenId === gen.id">
+      <h2 class="gen-title">{{ gen.name }}</h2>
+
+      <mat-grid-list cols="9" rowHeight="160px" gutterSize="8px">
+        <mat-grid-tile *ngFor="let p of gen.pokemons">
+          <mat-card class="pokemon-card" [routerLink]="['/sprites', p.name]">
+            <img
+              mat-card-image
+              [src]="
+                'https://img.pokemondb.net/sprites/home/normal/' +
+                p.name +
+                '.png'
+              "
+              [alt]="p.name"
+            />
+            <mat-card-content>
+              <div class="mat-caption">#{{ p.id }}</div>
+              <div class="mat-body-2">{{ p.name | titlecase }}</div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</div>

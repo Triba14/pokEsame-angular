@@ -1,0 +1,223 @@
+<div class="sprite-detail-page">
+  <div *ngIf="loading" class="loading-container">
+    <p>Loading...</p>
+  </div>
+
+  <div *ngIf="!loading" class="content">
+    <h1 class="page-title">{{ capitalize(pokemonName) }} sprites</h1>
+
+    <p class="description">
+      Below are all the sprites of
+      <strong>{{ formatId(pokemonId) }} {{ capitalize(pokemonName) }}</strong>
+      used throughout the Pokémon games.
+    </p>
+
+    <div class="back-button-container">
+      <button mat-raised-button color="accent" routerLink="/">
+        <mat-icon>arrow_back</mat-icon>
+        Back
+      </button>
+    </div>
+
+    <h2 class="section-title">Overview</h2>
+    <p class="section-description">
+      A brief look at how <em>{{ capitalize(pokemonName) }}</em> sprites have
+      changed over the years.
+    </p>
+
+    <div class="overview-table-wrapper">
+      <table class="overview-table">
+        <thead>
+          <tr>
+            <th *ngFor="let col of overviewColumns">
+              {{ capitalize(col.replace("gen", "Gen ")) }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of overviewData">
+            <ng-container *ngFor="let col of overviewColumns">
+              <th *ngIf="col === 'type'">{{ row[col] }}</th>
+              <td *ngIf="col !== 'type'">
+                <img
+                  *ngIf="row[col]"
+                  [src]="row[col]"
+                  [alt]="pokemonName"
+                  class="overview-sprite"
+                />
+                <span *ngIf="!row[col]" class="no-sprite">—</span>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngFor="let gen of generations" class="generation-section">
+      <h2 class="section-title">{{ gen.title }}</h2>
+
+      <table
+        *ngIf="!gen.hasBack"
+        class="generation-table"
+        [class.no-shiny]="!gen.hasShiny"
+      >
+        <thead>
+          <tr>
+            <th></th>
+            <th>Normal</th>
+            <th *ngIf="gen.hasShiny">Shiny</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let game of gen.games">
+            <th>{{ game.game }}</th>
+            <td>
+              <div class="sprite-group" *ngIf="hasSprites(game.normalSprites)">
+                <div
+                  class="sprite-item"
+                  *ngFor="let sprite of game.normalSprites"
+                >
+                  <img
+                    *ngIf="sprite.url"
+                    [src]="sprite.url"
+                    [alt]="pokemonName"
+                  />
+                  <span *ngIf="sprite.label" class="sprite-label">{{
+                    sprite.label
+                  }}</span>
+                </div>
+              </div>
+              <span *ngIf="!hasSprites(game.normalSprites)" class="no-sprite"
+                >—</span
+              >
+            </td>
+            <td *ngIf="gen.hasShiny">
+              <div class="sprite-group" *ngIf="hasSprites(game.shinySprites)">
+                <div
+                  class="sprite-item"
+                  *ngFor="let sprite of game.shinySprites"
+                >
+                  <img
+                    *ngIf="sprite.url"
+                    [src]="sprite.url"
+                    [alt]="pokemonName + ' shiny'"
+                  />
+                  <span *ngIf="sprite.label" class="sprite-label">{{
+                    sprite.label
+                  }}</span>
+                </div>
+              </div>
+              <span *ngIf="!hasSprites(game.shinySprites)" class="no-sprite"
+                >—</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table
+        *ngIf="gen.hasBack"
+        class="generation-table with-back"
+        [class.no-shiny]="!gen.hasShiny"
+      >
+        <thead>
+          <tr>
+            <th></th>
+            <th>Normal</th>
+            <th *ngIf="gen.hasShiny">Shiny</th>
+            <th>Back</th>
+            <th *ngIf="gen.hasShiny">Back, Shiny</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let game of gen.games">
+            <th>{{ game.game }}</th>
+            <td>
+              <div class="sprite-group" *ngIf="hasSprites(game.normalSprites)">
+                <div
+                  class="sprite-item"
+                  *ngFor="let sprite of game.normalSprites"
+                >
+                  <img
+                    *ngIf="sprite.url"
+                    [src]="sprite.url"
+                    [alt]="pokemonName"
+                  />
+                  <span *ngIf="sprite.label" class="sprite-label">{{
+                    sprite.label
+                  }}</span>
+                </div>
+              </div>
+              <span *ngIf="!hasSprites(game.normalSprites)" class="no-sprite"
+                >—</span
+              >
+            </td>
+            <td *ngIf="gen.hasShiny">
+              <div class="sprite-group" *ngIf="hasSprites(game.shinySprites)">
+                <div
+                  class="sprite-item"
+                  *ngFor="let sprite of game.shinySprites"
+                >
+                  <img
+                    *ngIf="sprite.url"
+                    [src]="sprite.url"
+                    [alt]="pokemonName + ' shiny'"
+                  />
+                  <span *ngIf="sprite.label" class="sprite-label">{{
+                    sprite.label
+                  }}</span>
+                </div>
+              </div>
+              <span *ngIf="!hasSprites(game.shinySprites)" class="no-sprite"
+                >—</span
+              >
+            </td>
+            <td>
+              <div class="sprite-group" *ngIf="hasSprites(game.backSprites)">
+                <div
+                  class="sprite-item"
+                  *ngFor="let sprite of game.backSprites"
+                >
+                  <img
+                    *ngIf="sprite.url"
+                    [src]="sprite.url"
+                    [alt]="pokemonName + ' back'"
+                  />
+                  <span *ngIf="sprite.label" class="sprite-label">{{
+                    sprite.label
+                  }}</span>
+                </div>
+              </div>
+              <span *ngIf="!hasSprites(game.backSprites)" class="no-sprite"
+                >—</span
+              >
+            </td>
+            <td *ngIf="gen.hasShiny">
+              <div
+                class="sprite-group"
+                *ngIf="hasSprites(game.backShinySprites)"
+              >
+                <div
+                  class="sprite-item"
+                  *ngFor="let sprite of game.backShinySprites"
+                >
+                  <img
+                    *ngIf="sprite.url"
+                    [src]="sprite.url"
+                    [alt]="pokemonName + ' back shiny'"
+                  />
+                  <span *ngIf="sprite.label" class="sprite-label">{{
+                    sprite.label
+                  }}</span>
+                </div>
+              </div>
+              <span *ngIf="!hasSprites(game.backShinySprites)" class="no-sprite"
+                >—</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
